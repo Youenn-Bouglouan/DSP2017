@@ -5,6 +5,7 @@
 *.user
 *.vsix
 *~
+**/packages
 IntelliFactory.WebSharper.JQuery/*.js
 **/Scripts/WebSharper/
 **/Content/WebSharper/

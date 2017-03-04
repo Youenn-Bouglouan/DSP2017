@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWebSharper", "HelloWebSharper\HelloWebSharper.fsproj", "{08D98735-4869-4FD5-8171-9C5907F6779C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWebSharper.Tests", "HelloWebSharper.Tests\HelloWebSharper.Tests.fsproj", "{854BF87D-B9E4-4FC4-95AA-563AB4367152}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08D98735-4869-4FD5-8171-9C5907F6779C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D98735-4869-4FD5-8171-9C5907F6779C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D98735-4869-4FD5-8171-9C5907F6779C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D98735-4869-4FD5-8171-9C5907F6779C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
