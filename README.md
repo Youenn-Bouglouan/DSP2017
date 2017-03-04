@@ -2,6 +2,7 @@
 Official repo for DSP 2017 (http://uczestnicy.dajsiepoznac.pl/lista)
 
 Check out the blog here: http://www.ybouglouan.pl/
+
 Subscribe to the RSS feed here: http://www.ybouglouan.pl/category/dsp2017/feed/
 
 Objectives:
