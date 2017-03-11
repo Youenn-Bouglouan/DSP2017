@@ -77,7 +77,7 @@
     <Content Include="Main.html" />
     <Content Include="App.config" />
     <Content Include="packages.config" />
-    <None Include="PolishNames.fsx" />
+    <None Include="AreYouPolish.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpMultipartParser">
