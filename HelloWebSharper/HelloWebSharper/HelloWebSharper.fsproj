@@ -70,13 +70,14 @@
     <Error Condition="!Exists('..\packages\WebSharper.3.6.19.242\build\WebSharper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WebSharper.3.6.19.242\build\WebSharper.targets'))" />
   </Target>
   <ItemGroup>
+    <Compile Include="PolishNames.fs" />
     <Compile Include="Remoting.fs" />
     <Compile Include="Client.fs" />
     <Compile Include="Main.fs" />
     <Content Include="Main.html" />
     <Content Include="App.config" />
     <Content Include="packages.config" />
-    <None Include="Playground.fsx" />
+    <None Include="PolishNames.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpMultipartParser">
