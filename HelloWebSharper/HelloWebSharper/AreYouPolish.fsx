@@ -11,7 +11,7 @@ let countCharCI char word =
     |> Seq.filter (fun current -> Char.ToLower current = Char.ToLower char) 
     |> Seq.length
 
-countCharCI 'c' "ccc" // 3
+countCharCI 'C' "ccc" // 3
 countCharCI 'c' "cCc" // 3
 countCharCI 'c' "" // 0
 countCharCI '2' "145" // 0
@@ -20,7 +20,7 @@ countCharCI '3' "3f3sdf" // 2
 /// Apply a function to all elements of a list, sum the results and multiply by the number of points
 let computePointsFor func elems points word =
     elems
-    |> List.map (fun pc -> func pc word)
+    |> List.map (fun e -> func e word)
     |> List.reduce (+)
     |> (*) points
 
@@ -64,7 +64,7 @@ countDigraphCI "sz" "Szczerba" // 1
 countDigraphCI "sz" "" // 0
 countDigraphCI "cz" "Wieczorkiewicz" // 2
 
-/// Apply computePointsForChars function on a word using Polish characters
+/// Apply computePointsFor to our countDigraphCI function
 let checkPolishDigraphs points word =
     computePointsFor countDigraphCI polishDigraphs points word
 
@@ -142,10 +142,10 @@ let decideIfPolish (word, density) =
 /// A test method
 let getPointsFor name =
     (name, 0)
-    |> checkAllPolishConditions 1 7 2
+    |> checkAllPolishConditions 1 6 3
 
-getPointsFor "Młynarczyk" // 10 (1 for ł, 2 for cz, 7 for czyk)
-getPointsFor "Włudzik" // 3 (1 for ł, 2 for dz)
+getPointsFor "Młynarczyk" // 10 (1 for ł, 3 for cz, 6 for czyk)
+getPointsFor "Włudzik" // 4 (1 for ł, 3 for dz)
 
 // The magic function that decides if the given surname is Polish or not.     
 let isNamePolish name =
