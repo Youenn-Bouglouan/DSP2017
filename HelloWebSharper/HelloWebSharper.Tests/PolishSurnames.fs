@@ -1,6 +1,6 @@
 ﻿module PolishNames.Tests
 
-open HelloWebSharper.PolishNames
+open HelloWebSharper.PolishSurnames
 open Swensen.Unquote
 open Xunit
 open FsUnit.Xunit

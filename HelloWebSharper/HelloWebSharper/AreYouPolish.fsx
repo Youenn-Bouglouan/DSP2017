@@ -6,16 +6,16 @@ open System
 // -----------------------------------------------------------------------------------------------
 
 /// Return the number of occurrences of a given char within a word (case-insensitive)
-let countCharCI char word =
+let countCharsCI char word =
     word
     |> Seq.filter (fun current -> Char.ToLower current = Char.ToLower char) 
     |> Seq.length
 
-countCharCI 'C' "ccc" // 3
-countCharCI 'c' "cCc" // 3
-countCharCI 'c' "" // 0
-countCharCI '2' "145" // 0
-countCharCI '3' "3f3sdf" // 2
+countCharsCI 'C' "ccc" // 3
+countCharsCI 'c' "cCc" // 3
+countCharsCI 'c' "" // 0
+countCharsCI '2' "145" // 0
+countCharsCI '3' "3f3sdf" // 2
 
 /// Apply a function to all elements of a list, sum the results and multiply by the number of points
 let computePointsFor func elems points word =
@@ -26,14 +26,14 @@ let computePointsFor func elems points word =
 
 let polishChars = ['ą';'ć';'ę';'ł';'ń';'ó';'ś';'ż';'ź']
 
-computePointsFor countCharCI polishChars 1 "Bob Johnson" // 0
-computePointsFor countCharCI polishChars 1 "Robert Jonsłon" // 1
-computePointsFor countCharCI polishChars 2 "Stanisław Wójcik" // 4
-computePointsFor countCharCI polishChars 1 "" // 0
+computePointsFor countCharsCI polishChars 1 "Bob Johnson" // 0
+computePointsFor countCharsCI polishChars 1 "Robert Jonsłon" // 1
+computePointsFor countCharsCI polishChars 2 "Stanisław Wójcik" // 4
+computePointsFor countCharsCI polishChars 1 "" // 0
 
 // Helper function with pre-baked parameters
 let checkPolishChars points word =
-    computePointsFor countCharCI polishChars points word
+    computePointsFor countCharsCI polishChars points word
 
 checkPolishChars 3 "Józef Gwóźdź" // 12
 
@@ -44,7 +44,7 @@ let polishDigraphs = ["ch";"cz";"dz";"dż";"dź";"rz";"sz"]
 
 /// Return the number of occurrences of a given digraph within a word (case-insensitive)
 /// The function ignores overlaps (countDigraphCI "cc" "cccc" returns 2 and not 3)
-let countDigraphCI (digraph:string) (word:string) =
+let countDigraphsCI (digraph:string) (word:string) =
     let wordCI = word.ToLower()
     let digraphCI = digraph.ToLower()
 
@@ -58,15 +58,15 @@ let countDigraphCI (digraph:string) (word:string) =
     if String.length word = 0 then 0
     else loop 0 0
 
-countDigraphCI "cz" "Szczerba" // 1
-countDigraphCI "cz" "szCZerba" // 1
-countDigraphCI "sz" "Szczerba" // 1
-countDigraphCI "sz" "" // 0
-countDigraphCI "cz" "Wieczorkiewicz" // 2
+countDigraphsCI "cz" "Szczerba" // 1
+countDigraphsCI "cz" "szCZerba" // 1
+countDigraphsCI "sz" "Szczerba" // 1
+countDigraphsCI "sz" "" // 0
+countDigraphsCI "cz" "Wieczorkiewicz" // 2
 
 /// Apply computePointsFor to our countDigraphCI function
 let checkPolishDigraphs points word =
-    computePointsFor countDigraphCI polishDigraphs points word
+    computePointsFor countDigraphsCI polishDigraphs points word
 
 checkPolishDigraphs 1 "szczrz" // 3
 checkPolishDigraphs 2 "Dziurdź" // 4

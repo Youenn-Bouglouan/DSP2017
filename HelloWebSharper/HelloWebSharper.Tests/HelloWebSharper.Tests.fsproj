@@ -59,7 +59,7 @@
   </Target>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Compile Include="PolishNames.fs" />
+    <Compile Include="PolishSurnames.fs" />
     <Compile Include="Remoting.fs" />
   </ItemGroup>
   <ItemGroup>
