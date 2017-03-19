@@ -23,12 +23,12 @@ let ``sayHello should say hello to the user passed as parameter`` () =
 // A test of the asynchronous sayHelloAsync, using XUnit + FsUnit
 [<Fact>]
 let ``sayHelloAsync should say hello to the user passed as parameter`` () = Async.StartAsTask <| async {
-    let! answer = sayHelloAsync "Richard"
+    let! answer = SayHelloAsync "Richard"
     answer |> should equal "Hello, Richard!"
 }
 
 // A test of the asynchronous sayHelloAsync, using Unquote
 [<Fact>]
 let ``sayHelloAsync should NOT say hello to John when Richard was passed as parameter`` () =     
-    let answer = async { return! sayHelloAsync "Richard" } |> Async.RunSynchronously
+    let answer = async { return! SayHelloAsync "Richard" } |> Async.RunSynchronously
     test <@ answer <> "Hello, John!" @>
