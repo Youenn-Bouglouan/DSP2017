@@ -6,15 +6,15 @@ open WebSharper.Sitelets
 
 type EndPoint =
     | [<EndPoint "GET /">] Home
+    | [<EndPoint "GET /templates">] Templates
 
 module Templating =
     open System.Web
 
-    type Page =
-        {
-            Title : string
-            Body : list<Element>
-        }
+    type Page = {
+        Title : string
+        Body : list<Element>
+    }
 
     let MainTemplate =
         Content.Template<Page>("~/Main.html")
@@ -28,6 +28,25 @@ module Templating =
                 Body = body
             }
 
+module AdvancedTemplating =
+    open System.Web
+
+    type AdvancedPage = {
+        Title: string
+        SomeTextHole: string
+    }
+
+    let Template =
+        Content.Template<AdvancedPage>("~/AdvancedTemplate.html")
+            .With("title", fun x -> x.Title)
+            .With("sometexthole", fun x -> x.SomeTextHole)
+
+    let Main context endpoint title someTextHole : Async<Content<EndPoint>> =
+        Content.WithTemplate Template {
+            Title = title
+            SomeTextHole = someTextHole
+        }
+    
 module Site =
 
     let HomePage context =
@@ -36,11 +55,19 @@ module Site =
             Div [ClientSide <@ Client.Main() @>]
         ]
 
+    let TemplatesPage context =
+        AdvancedTemplating.Main 
+            context
+            EndPoint.Templates
+            "Templating in WebSharper" // Our title hole
+            "Just a test page to play with the HTML templating engine in WebSharper!" // Our sometexthole hole
+
     [<Website>] // Main entry point for our application
     let Main =
         Application.MultiPage (fun context action ->
             match action with
             | Home -> HomePage context
+            | Templates -> TemplatesPage context
         )
 
 // Run the server as a console application using Owin

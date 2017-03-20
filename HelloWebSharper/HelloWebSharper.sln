@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWebSharper", "HelloWeb
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWebSharper.Tests", "HelloWebSharper.Tests\HelloWebSharper.Tests.fsproj", "{854BF87D-B9E4-4FC4-95AA-563AB4367152}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpPlayground", "CSharpPlayground\CSharpPlayground.csproj", "{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854BF87D-B9E4-4FC4-95AA-563AB4367152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
