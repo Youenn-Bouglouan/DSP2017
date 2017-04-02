@@ -30,23 +30,32 @@ module Templating =
 
 module AdvancedTemplating =
     open System.Web
-
+    
     type AdvancedPage = {
         Title: string
         SomeTextHole: string
+        SomeDataHole: list<Element>
+        ServerSideDataReplaceHole: list<Element>
+        ClientSideDataReplaceHole: list<Element>
     }
 
     let Template =
         Content.Template<AdvancedPage>("~/AdvancedTemplate.html")
             .With("title", fun x -> x.Title)
             .With("sometexthole", fun x -> x.SomeTextHole)
+            .With("somedatahole", fun x -> x.SomeDataHole)
+            .With("somedatareplacehole", fun x -> x.ServerSideDataReplaceHole)
+            .With("someclientdatareplacehole", fun x -> x.ClientSideDataReplaceHole)
 
-    let Main context endpoint title someTextHole : Async<Content<EndPoint>> =
+    let Main context endpoint title someTextHole someDataHole serverDataReplace clientDataReplace : Async<Content<EndPoint>> =
         Content.WithTemplate Template {
             Title = title
             SomeTextHole = someTextHole
+            SomeDataHole = someDataHole
+            ServerSideDataReplaceHole = serverDataReplace
+            ClientSideDataReplaceHole = clientDataReplace
         }
-    
+
 module Site =
 
     let HomePage context =
@@ -61,7 +70,27 @@ module Site =
             EndPoint.Templates
             "Templating in WebSharper" // Our title hole
             "Just a test page to play with the HTML templating engine in WebSharper!" // Our sometexthole hole
-
+            // Our server-side data-hole content starts here
+            [
+                H1 [Text "This is inserted via a data-hole attribute (server-side)"]
+                H3 [Text "Let's test a few HTML elements like H3..."]
+                H4 [Text "... or unsorted lists:"]
+                UL [
+                    LI [Text "one item..."]
+                    LI [Text "Another item!"]
+                    LI [Attr.Class "someStyle"]
+                        -< [Text "and yet another "]
+                        -< [B [Text "bold item"]]
+                        -< [Text " with a style attached"]
+                    ]
+            ]
+            // Our server-side data-replace content starts here
+            [
+                H1 [Text "This is inserted via a data-replace attribute (server-side)"]
+            ]
+            // Our client-side data-replace content starts here
+            [Div [ClientSide <@ Client.ReplaceDataExample() @>]]
+ 
     [<Website>] // Main entry point for our application
     let Main =
         Application.MultiPage (fun context action ->

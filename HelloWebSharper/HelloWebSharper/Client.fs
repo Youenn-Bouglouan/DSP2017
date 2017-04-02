@@ -5,9 +5,20 @@ open WebSharper.JavaScript
 open WebSharper.Html.Client
 open HelloWebSharper.PolishSurnames
 
+module Resources =
+    open WebSharper.Core.Resources
+
+    // Declare resource files. Those must be added to the VS project as Embedded Resources!
+    [<assembly:System.Web.UI.WebResource("custom_styles.css", "text/css")>]
+    do ()
+
+    // Declare types for automatic dependency resolution
+    type Styles() =
+        inherit BaseResource("custom_styles.css")
+
 [<JavaScript>]
 module Client =
-
+    
     let DisplaySurnameOrigin origin =
         match origin with
         | SurnameOrigin.NotPolish -> "not Polish"
@@ -58,4 +69,11 @@ module Client =
                 )
 
             Div [] -< [someStaticText]
+        ]
+
+    [<Require(typeof<Resources.Styles>)>]
+    let ReplaceDataExample () =
+        Div [
+            H1 [Attr.Class "styleFromSeparateCssFile"] -< [Text "This is inserted via a data-replace attribute (client-side)"]
+            P [Attr.Class "styleFromSeparateCssFile"] -< [Text "This content is generated on client-side by JavaScript code!"]
         ]

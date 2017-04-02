@@ -80,6 +80,7 @@
     <Content Include="packages.config" />
     <None Include="AreYouPolish.fsx" />
     <None Include="Playground.fsx" />
+    <EmbeddedResource Include="custom_styles.css" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HttpMultipartParser">

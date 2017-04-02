@@ -1,11 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>${title}</title>
-    <style></style>
+    <style>
+        .someStyle {
+            color: darkcyan;
+            font-style: oblique;
+        }
+    </style>
 </head>
 <body>
     <p>${sometexthole}</p>
+
+    <div data-hole="somedatahole"></div>
+
+    <div data-replace="somedatareplacehole"></div>
+
+    <div data-replace="someclientdatareplacehole"></div>
+    
+    <script data-replace="scripts"></script>
 </body>
 </html>
