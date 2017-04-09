@@ -71,6 +71,7 @@
   </Target>
   <ItemGroup>
     <Compile Include="PolishSurnames.fs" />
+    <Compile Include="PizzaManagerRestApi.fs" />
     <Compile Include="Remoting.fs" />
     <Compile Include="Client.fs" />
     <Compile Include="Main.fs" />

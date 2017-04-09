@@ -7,6 +7,7 @@ open WebSharper.Sitelets
 type EndPoint =
     | [<EndPoint "GET /">] Home
     | [<EndPoint "GET /templates">] Templates
+    | [<EndPoint "GET /pizzamanager">] Api of PizzaManagerRestApi.PublicApi
 
 module Templating =
     open System.Web
@@ -90,14 +91,25 @@ module Site =
             ]
             // Our client-side data-replace content starts here
             [Div [ClientSide <@ Client.ReplaceDataExample() @>]]
- 
+
     [<Website>] // Main entry point for our application
     let Main =
-        Application.MultiPage (fun context action ->
+
+        let mainWebsite = Application.MultiPage (fun context action ->
             match action with
             | Home -> HomePage context
             | Templates -> TemplatesPage context
+            | Api _ -> failwith "the routing is handled in PizzaManagerRestApi directly."                
         )
+
+        let pizzaManagerApi = Sitelet.EmbedInUnion <@ EndPoint.Api @> PizzaManagerRestApi.pizzaManagerSitelet
+
+        // Combine all the below sitelets into one
+        Sitelet.Sum [
+            pizzaManagerApi
+            //Sitelet.EmbedInUnion <@ EndPoint.Api @> PizzaManagerRestApi.pizzaManagerSitelet
+            mainWebsite
+        ]
 
 // Run the server as a console application using Owin
 module SelfHostedServer =
