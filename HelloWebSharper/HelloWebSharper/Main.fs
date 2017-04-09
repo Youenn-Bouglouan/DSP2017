@@ -107,7 +107,6 @@ module Site =
         // Combine all the below sitelets into one
         Sitelet.Sum [
             pizzaManagerApi
-            //Sitelet.EmbedInUnion <@ EndPoint.Api @> PizzaManagerRestApi.pizzaManagerSitelet
             mainWebsite
         ]
 

@@ -56,9 +56,6 @@ module PizzaManagerRestApi =
     // Implement the API endpoints
     let requestHandler (ctx:Context<PublicApi>) (request:PublicApi) : Async<Content<PublicApi>> =
         match request with
-//        | GetPizzas -> Content.Json <| fun ctx -> PizzaManagerDb.getAll
-//        | GetPizza name -> Content.Json <| fun ctx -> PizzaManagerDb.get name
-//        | AddPizza pizza -> Content.Json <| fun ctx -> PizzaManagerDb.save pizza
         | GetPizzas -> Content.Json (PizzaManagerDb.getAll())
         | GetPizza name -> Content.Json (PizzaManagerDb.get name)
         | AddPizza pizza -> Content.Json (PizzaManagerDb.save pizza)
@@ -82,7 +79,7 @@ module PizzaManagerRestApi =
                 { name = "Tomato Sauce"; quantity = Some (Milliliter 30) }
                 { name = "Parma Ham"; quantity = Some (Grams 100) }
                 { name = "Parmezan"; quantity = Some (Grams 50) }
-                { name = "Parmezan"; quantity = Some (Grams 50) }
+                { name = "Rucola"; quantity = Some (Grams 30) }
                 { name = "Mozzarella"; quantity = Some (Grams 200) } |]
             }
         ]
