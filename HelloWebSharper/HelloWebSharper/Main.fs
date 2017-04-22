@@ -118,22 +118,45 @@ module SelfHostedServer =
     open Microsoft.Owin.StaticFiles
     open Microsoft.Owin.FileSystems
     open WebSharper.Owin
+    open System
+    open System.Collections.Generic
+    open System.Threading.Tasks
+
+    type Greeting = { text: string }
+    type AppFunc = Func<IDictionary<string, obj>, Task>
+    let awaitTask = Async.AwaitIAsyncResult >> Async.Ignore
+    
+    type Startup() =
+
+        member this.Configuration(app: IAppBuilder) =
+//            app.Use(fun environment next ->
+//                printfn "showing environment...."
+//                for pair in environment.Environment do
+//                    printfn "%s : %A" pair.Key pair.Value
+//
+//                async { 
+//                    do! awaitTask <| next.Invoke()
+//                } |> Async.StartAsTask :> Task) |> ignore
+
+            app.Use(fun environment next ->
+                printfn "------ New request ------"
+                printfn "  Path: %s" (environment.Request.Path.ToString())
+                async { 
+                    do! awaitTask <| next.Invoke()
+                    printfn "  HTTP Status code: %i" environment.Response.StatusCode
+                } |> Async.StartAsTask :> Task) |> ignore
+
+            app.UseStaticFiles(
+                    StaticFileOptions(
+                        FileSystem = PhysicalFileSystem("..")))
+                .UseSitelet("..", Site.Main)
+            |> ignore
 
     [<EntryPoint>]
-    let Main args =
-        let rootDirectory, url =
-            match args with
-            | [| rootDirectory; url |] -> rootDirectory, url
-            | [| url |] -> "..", url
-            | [| |] -> "..", "http://localhost:9000/"
-            | _ -> eprintfn "Usage: HelloWebSharper ROOT_DIRECTORY URL"; exit 1
-        use server = WebApp.Start(url, fun appB ->
-            appB.UseStaticFiles(
-                    StaticFileOptions(
-                        FileSystem = PhysicalFileSystem(rootDirectory)))
-                .UseSitelet(rootDirectory, Site.Main)
-            |> ignore)
-
-        stdout.WriteLine("Serving {0}", url)
-        stdin.ReadLine() |> ignore
+    let main argv = 
+        let uri = "http://localhost:9000"
+        use app = WebApp.Start<Startup>(uri)
+        printfn "Serving %s" uri
+        Console.ReadKey() |> ignore
+        printfn "Stopping %s" uri
         0

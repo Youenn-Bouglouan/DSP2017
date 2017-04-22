@@ -65,7 +65,6 @@ module PizzaManagerRestApi =
                 pizzas.Add(pizza.Name, pizza)
                 Success pizza
     
-
     /// Display info about the current API
     type ApiInfo = { sampleUrl : string; description : string }
 
