@@ -12,8 +12,12 @@ module PizzaManagerRestApi =
         | [<EndPoint"GET /pizzas">] GetPizzas of settings : string
         /// GET /pizza/margarita
         | [<EndPoint"GET /pizza">] GetPizza of name : string
+        /// DELETE /pizza/margarita
+        | [<EndPoint "DELETE /pizza">] DeletePizza of name : string
         /// POST /pizza/ + Json content
-        | [<EndPoint"POST /pizza"; Json "pizza">] AddPizza of pizza : Pizza
+        | [<Method "POST"; CompiledName "pizza"; Json "pizzaData">] AddPizza of pizzaData : Pizza // Not working yet. See here: http://websharper.com/question/82758/post-endpoint-with-a-json-body-cannot-be-reached?filter=forum
+
+     and Test = { test : string }
 
      and
      [<NamedUnionCases"unit">]
@@ -25,7 +29,7 @@ module PizzaManagerRestApi =
      and Pizza =
         { [<Name"name">] Name : string
           [<Name"price">] Price : decimal
-          [<Name"ingredients">] Ingredients : Ingredient array }
+          [<Name"ingredients">][<OptionalField>] Ingredients : Ingredient array }
     
     [<NamedUnionCases"result">]
     type Result<'T> =
@@ -53,10 +57,10 @@ module PizzaManagerRestApi =
             | true -> Success (pizzas.Item(name))
         
         let getCI (name:string) =
-            let pizza = pizzas.Values |> Seq.tryFind (fun p -> p.Name.ToLower() = name.ToLower())
-            match pizza with
+            let nameFound = pizzas.Keys |> Seq.tryFind (fun p -> p.ToLower() = name.ToLower())
+            match nameFound with
             | None -> Failure(sprintf "Pizza '%s' could not be found!" name)
-            | Some p -> Success (p)
+            | Some p -> Success (pizzas.Item(p))
 
         let save pizza =
             match pizzas.ContainsKey(pizza.Name) with
@@ -64,16 +68,25 @@ module PizzaManagerRestApi =
             | false -> 
                 pizzas.Add(pizza.Name, pizza)
                 Success pizza
+
+        let deleteCI (name:string) =
+            let pizza = pizzas.Keys |> Seq.tryFind (fun p -> p.ToLower() = name.ToLower())
+            match pizza with
+            | None -> Failure(sprintf "Failed to delete '%s'. The pizza could not be found!" name)
+            | Some p -> 
+                pizzas.Remove(p) |> ignore
+                Success(sprintf "'%s' was successfully deleted from the database." name)
     
     /// Display info about the current API
     type ApiInfo = { sampleUrl : string; description : string }
 
     let showInfo =
         [|
-            { sampleUrl = "/pizzamanager or /pizzamanager/"; description = "Display information about the current API." }
-            { sampleUrl = "/pizzamanager/pizzas/names"; description = "List all pizzas available in the database." }
-            { sampleUrl = "/pizzamanager/pizzas/ or /pizzamanager/pizzas/all"; description = "Get all pizzas in the database." }
-            { sampleUrl = "/pizzamanager/pizza/{pizza_name}"; description = "Get the given pizza (case-insensitive)." }
+            { sampleUrl = "[GET] /pizzamanager or /pizzamanager/"; description = "Display information about the current API." }
+            { sampleUrl = "[GET] /pizzamanager/pizzas/names"; description = "List all pizzas available in the database." }
+            { sampleUrl = "[GET] /pizzamanager/pizzas/ or /pizzamanager/pizzas/all"; description = "Get all pizzas in the database." }
+            { sampleUrl = "[GET] /pizzamanager/pizza/{pizza_name}"; description = "Get the given pizza (case-insensitive)." }
+            { sampleUrl = "[DELETE] /pizzamanager/pizza/{pizza_name}"; description = "Delete the given pizza from the database (case-insensitive)." }
         |]
 
     /// Handle additional settings available for /pizzamanager/pizzas/
@@ -96,8 +109,9 @@ module PizzaManagerRestApi =
             | Success NamesOny -> Content.Json (PizzaManagerDb.getNamesOnly())
             | failure -> Content.Json (failure)
         | GetPizza name -> Content.Json (PizzaManagerDb.getCI name)
+        | DeletePizza name -> Content.Json (PizzaManagerDb.deleteCI name)
         | AddPizza pizza -> Content.Json (PizzaManagerDb.save pizza)
-
+        
     // And let WebSharper infer all the routings based on the request handler above
     let pizzaManagerSitelet = Sitelet.Infer requestHandler
 

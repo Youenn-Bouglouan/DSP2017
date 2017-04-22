@@ -7,7 +7,7 @@ open WebSharper.Sitelets
 type EndPoint =
     | [<EndPoint "GET /">] Home
     | [<EndPoint "GET /templates">] Templates
-    | [<EndPoint "GET /pizzamanager">] Api of PizzaManagerRestApi.PublicApi
+    | [<EndPoint "/pizzamanager">] PizzaManagerApi of PizzaManagerRestApi.PublicApi
 
 module Templating =
     open System.Web
@@ -99,16 +99,39 @@ module Site =
             match action with
             | Home -> HomePage context
             | Templates -> TemplatesPage context
-            | Api _ -> failwith "the routing is handled in PizzaManagerRestApi directly."                
+            | PizzaManagerApi _ -> failwith "the routing is handled in PizzaManagerRestApi directly."                
         )
 
-        let pizzaManagerApi = Sitelet.EmbedInUnion <@ EndPoint.Api @> PizzaManagerRestApi.pizzaManagerSitelet
+        let pizzaManagerApi = Sitelet.EmbedInUnion <@ EndPoint.PizzaManagerApi @> PizzaManagerRestApi.pizzaManagerSitelet
 
         // Combine all the below sitelets into one
         Sitelet.Sum [
             pizzaManagerApi
             mainWebsite
         ]
+
+module Site2 =
+
+    type EndPoint2 =
+        | [<EndPoint "GET /get">] Get
+        | [<EndPoint "POST /post_query"; Query "query">] PostQuery of query: string
+        | [<EndPoint "POST /post_body"; Json "body">] PostBody of body: JsonBody
+        | [<EndPoint "POST /post_simple">] PostSimple
+
+    and JsonBody = { test: string; }
+
+    [<Website>]
+    let Main =
+
+        let mainWebsite = Application.MultiPage (fun context action ->
+            match action with
+            | EndPoint2.Get -> Content.Json ("Get works!")
+            | EndPoint2.PostQuery query -> Content.Json ("PostQuery works!")
+            | EndPoint2.PostBody body -> Content.Json ("PostBody works!")
+            | EndPoint2.PostSimple -> Content.Json ("PostSimple works!")
+        )
+
+        Sitelet.Sum [ mainWebsite ]
 
 // Run the server as a console application using Owin
 module SelfHostedServer =
@@ -121,7 +144,7 @@ module SelfHostedServer =
     open System
     open System.Collections.Generic
     open System.Threading.Tasks
-
+//
     type Greeting = { text: string }
     type AppFunc = Func<IDictionary<string, obj>, Task>
     let awaitTask = Async.AwaitIAsyncResult >> Async.Ignore
@@ -129,23 +152,29 @@ module SelfHostedServer =
     type Startup() =
 
         member this.Configuration(app: IAppBuilder) =
-//            app.Use(fun environment next ->
-//                printfn "showing environment...."
-//                for pair in environment.Environment do
-//                    printfn "%s : %A" pair.Key pair.Value
-//
-//                async { 
-//                    do! awaitTask <| next.Invoke()
-//                } |> Async.StartAsTask :> Task) |> ignore
 
+            // Log info about incoming requests to the console
             app.Use(fun environment next ->
                 printfn "------ New request ------"
                 printfn "  Path: %s" (environment.Request.Path.ToString())
+                printfn "  Verb: %s" (environment.Request.Method)
+
+                use reader = new System.IO.StreamReader(environment.Request.Body)
+                let input = reader.ReadToEnd()
+                printfn "  Body: %s" (input)
+
                 async { 
                     do! awaitTask <| next.Invoke()
                     printfn "  HTTP Status code: %i" environment.Response.StatusCode
+
+                    if environment.Response.StatusCode <> 200 then 
+                        use writer = new System.IO.StreamWriter(environment.Response.Body)
+                        writer.WriteLine("an error occurred!")
+                        writer.Flush |> ignore
+
                 } |> Async.StartAsTask :> Task) |> ignore
 
+            // Load our site
             app.UseStaticFiles(
                     StaticFileOptions(
                         FileSystem = PhysicalFileSystem("..")))
