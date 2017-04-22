@@ -24,7 +24,7 @@ module PizzaManagerRestApi =
      Ingredient =
         | [<Name "u">] Unit of name:string * quantity:int
         | [<Name "g">] Grams of name:string * quantity:int
-        | [<Name "ml">] Milliliter of name:string * quantity:int
+        | [<Name "ml">] Milliliters of name:string * quantity:int
      
      and Pizza =
         { [<Name"name">] Name : string
@@ -119,16 +119,16 @@ module PizzaManagerRestApi =
     let populatePizzas =
         [
             { Name = "Margherita"; Price = 12M; Ingredients = [|
-                Milliliter("Tomato Sauce", 30)
+                Milliliters("Tomato Sauce", 30)
                 Grams("Mozzarella", 200) |]
             }
             { Name = "Funghi"; Price = 14M; Ingredients = [|
-                Milliliter ("Tomato Sauce", 30)
+                Milliliters ("Tomato Sauce", 30)
                 Grams ("Mushrooms", 100)
                 Grams ("Mozzarella", 200) |]
             }
             { Name = "Rucola"; Price = 21M; Ingredients = [|
-                Milliliter ("Tomato Sauce", 30)
+                Milliliters ("Tomato Sauce", 30)
                 Grams ("Parma Ham", 100)
                 Grams ("Parmezan", 50)
                 Grams ("Rucola", 50)
@@ -139,7 +139,7 @@ module PizzaManagerRestApi =
                 Grams ("Spinach", 150)
                 Grams ("Parmezan", 50)
                 Grams ("Mushrooms", 100)
-                Milliliter ("Tomato Sauce", 30) |]
+                Milliliters ("Tomato Sauce", 30) |]
             }
         ]
         |> Seq.iter (PizzaManagerDb.save >> ignore)
