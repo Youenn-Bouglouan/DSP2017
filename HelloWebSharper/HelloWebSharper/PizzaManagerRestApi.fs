@@ -92,11 +92,11 @@ module PizzaManagerRestApi =
     /// Handle additional settings available for /pizzamanager/pizzas/
     type ListSettings =
     | All
-    | NamesOny
+    | NamesOnly
 
     let getSettings = function
         | "" | "all" -> Success All
-        | "names" -> Success NamesOny
+        | "names" -> Success NamesOnly
         | notRecognized -> Failure (sprintf "'%s' is not a valid setting!" notRecognized)
 
     // Implement the API endpoints
@@ -106,7 +106,7 @@ module PizzaManagerRestApi =
         | GetPizzas settings -> 
             match (getSettings settings) with
             | Success All -> Content.Json (PizzaManagerDb.getAll())
-            | Success NamesOny -> Content.Json (PizzaManagerDb.getNamesOnly())
+            | Success NamesOnly -> Content.Json (PizzaManagerDb.getNamesOnly())
             | failure -> Content.Json (failure)
         | GetPizza name -> Content.Json (PizzaManagerDb.getCI name)
         | DeletePizza name -> Content.Json (PizzaManagerDb.deleteCI name)
