@@ -61,9 +61,6 @@
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
-    <None Include="_TraceEventProgrammersGuide.docx" />
-    <Content Include="TraceEvent.ReleaseNotes.txt" />
-    <Content Include="TraceEvent.ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BenchmarkDotNet">
