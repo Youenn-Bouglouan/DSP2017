@@ -9,6 +9,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloWebSharper.Tests", "He
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpPlayground", "CSharpPlayground\CSharpPlayground.csproj", "{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BenchmarkDotNetFsharp", "BenchmarkDotNetFsharp\BenchmarkDotNetFsharp.fsproj", "{E2A4AEAE-1955-48E4-B196-707239DFF4F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkDotNetCsharp", "BenchmarkDotNetCsharp\BenchmarkDotNetCsharp.csproj", "{2F87820C-6D39-42BC-979A-C2C740AD6B66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50FE23ED-C5B0-4DC1-83F5-2D29CAF62A31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A4AEAE-1955-48E4-B196-707239DFF4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A4AEAE-1955-48E4-B196-707239DFF4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A4AEAE-1955-48E4-B196-707239DFF4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A4AEAE-1955-48E4-B196-707239DFF4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F87820C-6D39-42BC-979A-C2C740AD6B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F87820C-6D39-42BC-979A-C2C740AD6B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F87820C-6D39-42BC-979A-C2C740AD6B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F87820C-6D39-42BC-979A-C2C740AD6B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
