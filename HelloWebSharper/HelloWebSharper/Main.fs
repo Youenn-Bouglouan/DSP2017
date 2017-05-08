@@ -110,29 +110,6 @@ module Site =
             mainWebsite
         ]
 
-module Site2 =
-
-    type EndPoint2 =
-        | [<EndPoint "GET /get">] Get
-        | [<EndPoint "POST /post_query"; Query "query">] PostQuery of query: string
-        | [<EndPoint "POST /post_body"; Json "body">] PostBody of body: JsonBody
-        | [<EndPoint "POST /post_simple">] PostSimple
-
-    and JsonBody = { test: string; }
-
-    [<Website>]
-    let Main =
-
-        let mainWebsite = Application.MultiPage (fun context action ->
-            match action with
-            | EndPoint2.Get -> Content.Json ("Get works!")
-            | EndPoint2.PostQuery query -> Content.Json ("PostQuery works!")
-            | EndPoint2.PostBody body -> Content.Json ("PostBody works!")
-            | EndPoint2.PostSimple -> Content.Json ("PostSimple works!")
-        )
-
-        Sitelet.Sum [ mainWebsite ]
-
 // Run the server as a console application using Owin
 module SelfHostedServer =
 
@@ -158,10 +135,15 @@ module SelfHostedServer =
                 printfn "------ New request ------"
                 printfn "  Path: %s" (environment.Request.Path.ToString())
                 printfn "  Verb: %s" (environment.Request.Method)
+                                
+                (*
+                Those 3 lines were causing the POST method AddPizza to fail
+                The reason is explained here: http://websharper.com/question/82758/post-endpoint-with-a-json-body-cannot-be-reached
 
                 use reader = new System.IO.StreamReader(environment.Request.Body)
-                let input = reader.ReadToEnd()
-                printfn "  Body: %s" (input)
+                //let input = reader.ReadToEnd()
+                //printfn "  Body: %s" (input)
+                *)
 
                 async { 
                     do! awaitTask <| next.Invoke()

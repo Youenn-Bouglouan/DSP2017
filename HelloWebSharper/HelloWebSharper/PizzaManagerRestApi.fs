@@ -15,9 +15,7 @@ module PizzaManagerRestApi =
         /// DELETE /pizza/margarita
         | [<EndPoint "DELETE /pizza">] DeletePizza of name : string
         /// POST /pizza/ + Json content
-        | [<Method "POST"; CompiledName "pizza"; Json "pizzaData">] AddPizza of pizzaData : Pizza // Not working yet. See here: http://websharper.com/question/82758/post-endpoint-with-a-json-body-cannot-be-reached?filter=forum
-
-     and Test = { test : string }
+        | [<Method "POST"; CompiledName "pizza"; Json "pizzaData">] AddPizza of pizzaData : Pizza
 
      and
      [<NamedUnionCases"unit">]
