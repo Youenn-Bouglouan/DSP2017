@@ -17250,7 +17250,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,jQuery,UI,Next,Var,Doc,AttrProxy,List,Var1,AttrModule,UI1,Next1,Demo,Client;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,jQuery,UI,Next,Var,UI1,Next1,Demo,Client,ListModel,AttrModule,Var1,View1,Doc,View,List,AttrProxy,Arrays;
  Runtime.Define(Global,{
   UI:{
    Next:{
@@ -17258,28 +17258,77 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
      Client:{
       Main:Runtime.Field(function()
       {
-       var _brand_19_1,_newTabName_20_1,_test_21_1,_Brand_24_2,_navBar_23_1,attrs,attrs1,attrs2,attrs3,_NavBar_28_1,_CreateNewTab_28_1,attrs4,attrs5;
+       var _brand_27_1,_newTabName_28_1,_newTabUrl_29_1,arg00,arg10,_tabs_30_2,_mapTab_33_7,_Brand_45_2,_Tabs_45_1,_initNavbar_44_1,attrs,attrs1,attrs2,_NavBar_59_1,_CreateNewTab_59_1,attrs3,attrs4;
        jQuery("#main").empty();
-       _brand_19_1=Var.Create("Default brand");
-       _newTabName_20_1=Var.Create("");
-       _test_21_1=Var.Create("test");
-       _Brand_24_2=_brand_19_1.get_View();
+       _brand_27_1=Var.Create("Play With UI.Next!");
+       _newTabName_28_1=Var.Create("");
+       _newTabUrl_29_1=Var.Create("");
+       arg00=function(t)
+       {
+        return t.Name;
+       };
+       arg10=Client.sampleTabs();
+       _tabs_30_2=ListModel.Create(arg00,arg10);
+       _mapTab_33_7=function(tab)
+       {
+        var ActiveClass,SetActive,Url,Name;
+        ActiveClass=AttrModule.DynamicClass("active",tab.IsActive.get_View(),function(x)
+        {
+         return x;
+        });
+        SetActive=function()
+        {
+         return function()
+         {
+          _tabs_30_2.Iter(function(t)
+          {
+           return t.Name!==tab.Name?Var1.Set(t.IsActive,false):null;
+          });
+          return Var1.Set(tab.IsActive,true);
+         };
+        };
+        Url=View1.Const(tab.Url);
+        Name=View1.Const(tab.Name);
+        return Doc.Concat([Doc.Element("li",[ActiveClass],[Doc.TextNode("\n                    "),Doc.Element("a",[AttrModule.Handler("click",SetActive),AttrModule.Dynamic("href",View.Map(function(s)
+        {
+         return""+s+"";
+        },Url))],[Doc.TextView(Name)]),Doc.TextNode("\n                ")])]);
+       };
+       _Brand_45_2=_brand_27_1.get_View();
+       _Tabs_45_1=List.ofArray([Doc.Convert(_mapTab_33_7,_tabs_30_2.get_View())]);
        attrs=[AttrProxy.Create("id","navbar-template")];
        attrs1=[AttrProxy.Create("class","navbar navbar-inverse")];
        attrs2=[AttrProxy.Create("class","container-fluid")];
-       attrs3=[AttrProxy.Create("class","nav navbar-nav")];
-       _navBar_23_1=Doc.Concat([Doc.Element("div",attrs,[Doc.TextNode("\n    "),Doc.Element("nav",attrs1,[Doc.TextNode("\n        "),Doc.Element("div",attrs2,[Doc.TextNode("\n            "),Doc.Element("div",[AttrProxy.Create("class","navbar-header")],[Doc.TextNode("\n                "),Doc.Element("a",[AttrProxy.Create("class","navbar-brand"),AttrProxy.Create("href","#")],[Doc.TextView(_Brand_24_2)]),Doc.TextNode("\n            ")]),Doc.TextNode("\n            "),Doc.Element("ul",attrs3,[Doc.TextNode("\n                "),Doc.Element("li",[AttrProxy.Create("class","active")],[Doc.Element("a",[AttrProxy.Create("href","#")],[Doc.TextNode("Home")])]),Doc.TextNode("\n                "),Doc.Element("li",[],[Doc.Element("a",[AttrProxy.Create("href","#")],[Doc.TextNode("Page 1")])]),Doc.TextNode("\n                "),Doc.Element("li",[],[Doc.Element("a",[AttrProxy.Create("href","#")],[Doc.TextNode("Page 2")])]),Doc.TextNode("\n                "),Doc.Element("li",[],[Doc.Element("a",[AttrProxy.Create("href","#")],[Doc.TextNode("Page 3")])]),Doc.TextNode("\n            ")]),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]);
-       _NavBar_28_1=List.ofArray([_navBar_23_1]);
-       _CreateNewTab_28_1=function()
+       _initNavbar_44_1=Doc.Concat([Doc.Element("div",attrs,[Doc.TextNode("\n    "),Doc.Element("nav",attrs1,[Doc.TextNode("\n        "),Doc.Element("div",attrs2,[Doc.TextNode("\n            "),Doc.Element("div",[AttrProxy.Create("class","navbar-header")],[Doc.TextNode("\n                "),Doc.Element("a",[AttrProxy.Create("class","navbar-brand"),AttrProxy.Create("href","#")],[Doc.TextView(_Brand_45_2)]),Doc.TextNode("\n            ")]),Doc.TextNode("\n            "),Doc.Element("ul",[AttrProxy.Create("class","nav navbar-nav")],Arrays.ofSeq(_Tabs_45_1)),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]);
+       _NavBar_59_1=List.ofArray([_initNavbar_44_1]);
+       _CreateNewTab_59_1=function()
        {
         return function()
         {
-         return Var1.Set(_test_21_1,"clicked!");
+         _tabs_30_2.Add({
+          Name:Var.Get(_newTabName_28_1),
+          Url:Var.Get(_newTabUrl_29_1),
+          IsActive:Var.Create(false)
+         });
+         Var1.Set(_newTabName_28_1,"");
+         return Var1.Set(_newTabUrl_29_1,"");
         };
        };
-       attrs4=[AttrProxy.Create("class","form-horizontal")];
-       attrs5=[AttrProxy.Create("class","form-group")];
-       return Doc.RunById("main",Doc.Concat([Doc.Concat(_NavBar_28_1),Doc.TextNode("\n\n"),Doc.Element("form",attrs4,[Doc.TextNode("\n\n    "),Doc.Element("div",[AttrProxy.Create("class","form-group")],[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Enter NavBar's brand"),AttrProxy.Create("class","form-control")],_brand_19_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n\n    "),Doc.Element("div",[AttrProxy.Create("class","form-group")],[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder",""),AttrProxy.Create("class","form-control")],_test_21_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n\n    "),Doc.Element("div",attrs5,[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Enter name of the new tab"),AttrProxy.Create("class","form-control")],_newTabName_20_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Element("button",[AttrProxy.Create("type","button"),AttrModule.Handler("click",_CreateNewTab_28_1),AttrProxy.Create("class","btn btn-success")],[Doc.TextNode("Create new tab")]),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]));
+       attrs3=[AttrProxy.Create("class","form-horizontal")];
+       attrs4=[AttrProxy.Create("class","form-group")];
+       return Doc.RunById("main",Doc.Concat([Doc.Concat(_NavBar_59_1),Doc.TextNode("\n\n"),Doc.Element("form",attrs3,[Doc.TextNode("\n    "),Doc.Element("div",[AttrProxy.Create("class","form-group")],[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Enter NavBar's brand"),AttrProxy.Create("class","form-control")],_brand_27_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n\n    "),Doc.Element("div",attrs4,[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Name of the new tab"),AttrProxy.Create("class","form-control")],_newTabName_28_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Url of the new tab"),AttrProxy.Create("class","form-control")],_newTabUrl_29_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Element("button",[AttrProxy.Create("type","button"),AttrModule.Handler("click",_CreateNewTab_59_1),AttrProxy.Create("class","btn btn-success")],[Doc.TextNode("Create new tab")]),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]));
+      }),
+      sampleTabs:Runtime.Field(function()
+      {
+       return List.ofArray([{
+        Name:"First tab",
+        Url:"/#",
+        IsActive:Var.Create(true)
+       },{
+        Name:"Second tab",
+        Url:"/#",
+        IsActive:Var.Create(false)
+       }]);
       })
      }
     }
@@ -17292,18 +17341,23 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
   Var=Runtime.Safe(Next.Var);
-  Doc=Runtime.Safe(Next.Doc);
-  AttrProxy=Runtime.Safe(Next.AttrProxy);
-  List=Runtime.Safe(Global.WebSharper.List);
-  Var1=Runtime.Safe(Next.Var1);
-  AttrModule=Runtime.Safe(Next.AttrModule);
   UI1=Runtime.Safe(Global.UI);
   Next1=Runtime.Safe(UI1.Next);
   Demo=Runtime.Safe(Next1.Demo);
-  return Client=Runtime.Safe(Demo.Client);
+  Client=Runtime.Safe(Demo.Client);
+  ListModel=Runtime.Safe(Next.ListModel);
+  AttrModule=Runtime.Safe(Next.AttrModule);
+  Var1=Runtime.Safe(Next.Var1);
+  View1=Runtime.Safe(Next.View1);
+  Doc=Runtime.Safe(Next.Doc);
+  View=Runtime.Safe(Next.View);
+  List=Runtime.Safe(Global.WebSharper.List);
+  AttrProxy=Runtime.Safe(Next.AttrProxy);
+  return Arrays=Runtime.Safe(Global.WebSharper.Arrays);
  });
  Runtime.OnLoad(function()
  {
+  Client.sampleTabs();
   Client.Main();
   return;
  });

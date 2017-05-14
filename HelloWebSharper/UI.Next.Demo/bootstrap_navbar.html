@@ -4,11 +4,10 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">$!{Brand}</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+            <ul class="nav navbar-nav" data-hole="Tabs">
+                <li data-template="Tab" data-attr="ActiveClass">
+                    <a data-event-click="SetActive" href="$!{Url}">$!{Name}</a>
+                </li>
             </ul>
         </div>
     </nav>
