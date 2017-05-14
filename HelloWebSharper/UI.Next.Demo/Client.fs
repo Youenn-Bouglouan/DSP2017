@@ -10,21 +10,26 @@ module Client =
     
     open WebSharper.JQuery
  
-    type IndexTemplate = Templating.Template<"navbar_sample.html">
-    type BsNavBarTemplate = Templating.Template<"bootstrap_navbar.html">
+    type NavbarSampleTemplate = Templating.Template<"navbar_sample.html">
+    type BsNavbarTemplate = Templating.Template<"bootstrap_navbar.html">
 
     let Main =
         JQuery.Of("#main").Empty().Ignore
         
         let brand = Var.Create "Default brand"
+        let newTabName = Var.Create ""
+        let test = Var.Create "test"
        
         let navBar = 
-            BsNavBarTemplate.Doc(
+            BsNavbarTemplate.Doc(
                 Brand = brand.View
             )
         
-        IndexTemplate.Doc(
+        NavbarSampleTemplate.Doc(
             Brand = brand,
-            NavBar = [navBar]
+            NavBar = [navBar],
+            NewTabName = newTabName,
+            Test = test,
+            CreateNewTab = fun elem event -> (Var.Set test "clicked!")
         )
         |> Doc.RunById "main"
