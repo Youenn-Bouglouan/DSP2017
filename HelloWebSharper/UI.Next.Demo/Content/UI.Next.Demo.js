@@ -17250,7 +17250,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,jQuery,UI,Next,Var,UI1,Next1,Demo,Client,ListModel,AttrModule,Var1,View1,Doc,View,List,AttrProxy,Arrays;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Var,UI1,Next1,Demo,Client,ListModel,AttrModule,Var1,View1,Doc,View,List,AttrProxy,Arrays;
  Runtime.Define(Global,{
   UI:{
    Next:{
@@ -17258,18 +17258,17 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
      Client:{
       Main:Runtime.Field(function()
       {
-       var _brand_27_1,_newTabName_28_1,_newTabUrl_29_1,arg00,arg10,_tabs_30_2,_mapTab_33_7,_Brand_45_2,_Tabs_45_1,_initNavbar_44_1,attrs,attrs1,attrs2,_NavBar_59_1,_CreateNewTab_59_1,attrs3,attrs4;
-       jQuery("#main").empty();
-       _brand_27_1=Var.Create("Play With UI.Next!");
-       _newTabName_28_1=Var.Create("");
-       _newTabUrl_29_1=Var.Create("");
+       var _brand_24_1,_newTabName_25_1,_newTabUrl_26_1,arg00,arg10,_tabs_27_2,_mapTab_30_7,_Brand_42_2,_Tabs_42_1,_initNavbar_41_1,attrs,attrs1,attrs2,_NavBar_56_1,_CreateNewTab_56_1,attrs3,attrs4;
+       _brand_24_1=Var.Create("Play With UI.Next!");
+       _newTabName_25_1=Var.Create("");
+       _newTabUrl_26_1=Var.Create("");
        arg00=function(t)
        {
         return t.Name;
        };
        arg10=Client.sampleTabs();
-       _tabs_30_2=ListModel.Create(arg00,arg10);
-       _mapTab_33_7=function(tab)
+       _tabs_27_2=ListModel.Create(arg00,arg10);
+       _mapTab_30_7=function(tab)
        {
         var ActiveClass,SetActive,Url,Name;
         ActiveClass=AttrModule.DynamicClass("active",tab.IsActive.get_View(),function(x)
@@ -17280,7 +17279,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
         {
          return function()
          {
-          _tabs_30_2.Iter(function(t)
+          _tabs_27_2.Iter(function(t)
           {
            return t.Name!==tab.Name?Var1.Set(t.IsActive,false):null;
           });
@@ -17294,29 +17293,29 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          return""+s+"";
         },Url))],[Doc.TextView(Name)]),Doc.TextNode("\n                ")])]);
        };
-       _Brand_45_2=_brand_27_1.get_View();
-       _Tabs_45_1=List.ofArray([Doc.Convert(_mapTab_33_7,_tabs_30_2.get_View())]);
+       _Brand_42_2=_brand_24_1.get_View();
+       _Tabs_42_1=List.ofArray([Doc.Convert(_mapTab_30_7,_tabs_27_2.get_View())]);
        attrs=[AttrProxy.Create("id","navbar-template")];
        attrs1=[AttrProxy.Create("class","navbar navbar-inverse")];
        attrs2=[AttrProxy.Create("class","container-fluid")];
-       _initNavbar_44_1=Doc.Concat([Doc.Element("div",attrs,[Doc.TextNode("\n    "),Doc.Element("nav",attrs1,[Doc.TextNode("\n        "),Doc.Element("div",attrs2,[Doc.TextNode("\n            "),Doc.Element("div",[AttrProxy.Create("class","navbar-header")],[Doc.TextNode("\n                "),Doc.Element("a",[AttrProxy.Create("class","navbar-brand"),AttrProxy.Create("href","#")],[Doc.TextView(_Brand_45_2)]),Doc.TextNode("\n            ")]),Doc.TextNode("\n            "),Doc.Element("ul",[AttrProxy.Create("class","nav navbar-nav")],Arrays.ofSeq(_Tabs_45_1)),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]);
-       _NavBar_59_1=List.ofArray([_initNavbar_44_1]);
-       _CreateNewTab_59_1=function()
+       _initNavbar_41_1=Doc.Concat([Doc.Element("div",attrs,[Doc.TextNode("\n    "),Doc.Element("nav",attrs1,[Doc.TextNode("\n        "),Doc.Element("div",attrs2,[Doc.TextNode("\n            "),Doc.Element("div",[AttrProxy.Create("class","navbar-header")],[Doc.TextNode("\n                "),Doc.Element("a",[AttrProxy.Create("class","navbar-brand"),AttrProxy.Create("href","#")],[Doc.TextView(_Brand_42_2)]),Doc.TextNode("\n            ")]),Doc.TextNode("\n            "),Doc.Element("ul",[AttrProxy.Create("class","nav navbar-nav")],Arrays.ofSeq(_Tabs_42_1)),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]);
+       _NavBar_56_1=List.ofArray([_initNavbar_41_1]);
+       _CreateNewTab_56_1=function()
        {
         return function()
         {
-         _tabs_30_2.Add({
-          Name:Var.Get(_newTabName_28_1),
-          Url:Var.Get(_newTabUrl_29_1),
+         _tabs_27_2.Add({
+          Name:Var.Get(_newTabName_25_1),
+          Url:Var.Get(_newTabUrl_26_1),
           IsActive:Var.Create(false)
          });
-         Var1.Set(_newTabName_28_1,"");
-         return Var1.Set(_newTabUrl_29_1,"");
+         Var1.Set(_newTabName_25_1,"");
+         return Var1.Set(_newTabUrl_26_1,"");
         };
        };
        attrs3=[AttrProxy.Create("class","form-horizontal")];
        attrs4=[AttrProxy.Create("class","form-group")];
-       return Doc.RunById("main",Doc.Concat([Doc.Concat(_NavBar_59_1),Doc.TextNode("\n\n"),Doc.Element("form",attrs3,[Doc.TextNode("\n    "),Doc.Element("div",[AttrProxy.Create("class","form-group")],[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Enter NavBar's brand"),AttrProxy.Create("class","form-control")],_brand_27_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n\n    "),Doc.Element("div",attrs4,[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Name of the new tab"),AttrProxy.Create("class","form-control")],_newTabName_28_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Url of the new tab"),AttrProxy.Create("class","form-control")],_newTabUrl_29_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Element("button",[AttrProxy.Create("type","button"),AttrModule.Handler("click",_CreateNewTab_59_1),AttrProxy.Create("class","btn btn-success")],[Doc.TextNode("Create new tab")]),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]));
+       return Doc.RunById("main",Doc.Concat([Doc.Concat(_NavBar_56_1),Doc.TextNode("\n\n"),Doc.Element("form",attrs3,[Doc.TextNode("\n    "),Doc.Element("div",[AttrProxy.Create("class","form-group")],[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Enter NavBar's brand"),AttrProxy.Create("class","form-control")],_brand_24_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n\n    "),Doc.Element("div",attrs4,[Doc.TextNode("\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Name of the new tab"),AttrProxy.Create("class","form-control")],_newTabName_25_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Input([AttrProxy.Create("type","text"),AttrProxy.Create("placeholder","Url of the new tab"),AttrProxy.Create("class","form-control")],_newTabUrl_26_1),Doc.TextNode("\n        ")]),Doc.TextNode("\n\n        "),Doc.Element("div",[AttrProxy.Create("class","col-md-2")],[Doc.TextNode("\n            "),Doc.Element("button",[AttrProxy.Create("type","button"),AttrModule.Handler("click",_CreateNewTab_56_1),AttrProxy.Create("class","btn btn-success")],[Doc.TextNode("Create new tab")]),Doc.TextNode("\n        ")]),Doc.TextNode("\n    ")]),Doc.TextNode("\n")])]));
       }),
       sampleTabs:Runtime.Field(function()
       {
@@ -17337,7 +17336,6 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
  });
  Runtime.OnInit(function()
  {
-  jQuery=Runtime.Safe(Global.jQuery);
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
   Var=Runtime.Safe(Next.Var);

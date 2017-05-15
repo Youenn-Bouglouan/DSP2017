@@ -7,8 +7,6 @@ open WebSharper.UI.Next.Html
 
 [<JavaScript>]
 module Client =
-    
-    open WebSharper.JQuery
  
     type NavbarSampleTemplate = Templating.Template<"navbar_sample.html">
     type BsNavbarTemplate = Templating.Template<"bootstrap_navbar.html">
@@ -21,7 +19,6 @@ module Client =
     ]
 
     let Main =
-        JQuery.Of("#main").Empty().Ignore
         
         // Reactive variables
         let brand = Var.Create "Play With UI.Next!"
