@@ -8,7 +8,7 @@ open WebSharper.UI.Next.Client
 open WebSharper.D3
 open WebSharper.Html.Client
 
-[<JavaScript>]
+//[<JavaScript>]
 module Client =
 
     [<Inline "+$x">]

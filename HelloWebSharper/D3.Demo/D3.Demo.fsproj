@@ -44,6 +44,7 @@
     <Content Include="index.html" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
+    <Compile Include="ZoomableMap.fs" />
     <Compile Include="Global.asax.fs" />
     <None Include="Setup.fsx" />
     <Content Include="packages.config" />

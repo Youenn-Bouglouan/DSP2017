@@ -6,12 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="Content/D3.Demo.css" />
     <script type="text/javascript" src="Content/D3.Demo.head.js"></script>
+    
+    <style>
+        .background {
+            fill: none;
+            pointer-events: all;
+        }
+
+        #states {
+            fill: #aaa;
+        }
+
+        #states .active {
+            fill: orange;
+        }
+
+        #state-borders {
+            fill: blue;
+            stroke: blue;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
 <div id="main"/>
 
-<script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
-<script type="text/javascript" src="Content/D3.Demo.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script type="text/javascript" src="Content/D3.Demo.js"></script>
+    <!--<script type="text/javascript" src="Content/D3.Demo.min.js"></script>-->
 </body>
 </html>
